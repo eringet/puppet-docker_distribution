@@ -7,9 +7,9 @@ class docker_distribution::config {
     content => template("${module_name}/config.yml.erb"),
   }
 
-  if $::docker_distribution::manage_as == 'service' and 
-     $::docker_distribution::journald_forward_enable and 
-     $::operatingsystemmajrelease == 7 {
+  if $::docker_distribution::manage_as == 'service' and
+  $::docker_distribution::journald_forward_enable and
+  $::operatingsystemmajrelease == '7' {
     file { '/etc/systemd/system/docker-distribution.service.d':
       ensure => 'directory',
       owner  => 'root',

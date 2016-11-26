@@ -459,11 +459,11 @@ class docker_distribution (
   validate_re($storage_cache_blobdescriptor, '^(redis|inmemory)$')
   if $auth_type {validate_re($auth_type, '^(token|htpasswd)$')}
 
-  contain docker_distribution::install
-  contain docker_distribution::config
-  contain docker_distribution::service
+  contain ::docker_distribution::install
+  contain ::docker_distribution::config
+  contain ::docker_distribution::service
 
-  Class['docker_distribution::install'] ->
-  Class['docker_distribution::config'] ~>
-  Class['docker_distribution::service']
+  Class['::docker_distribution::install'] ->
+  Class['::docker_distribution::config'] ~>
+  Class['::docker_distribution::service']
 }

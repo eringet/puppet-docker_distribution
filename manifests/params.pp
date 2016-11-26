@@ -3,12 +3,12 @@ class docker_distribution::params {
   $container_image = 'docker.io/registry:latest'
 
   case $::osfamily {
-    redhat  : {
+    'redhat'  : {
       $package_name = 'docker-distribution'
       $service_name = 'docker-distribution'
       $config_file  = '/etc/docker-distribution/registry/config.yml'
     }
-    suse    : {
+    'suse'    : {
       $package_name = 'docker-distribution-registry'
       $service_name = 'registry'
       $config_file  = '/etc/registry/config.yml'
@@ -101,7 +101,7 @@ class docker_distribution::params {
   $http_tls_clientcas = undef
   $http_debug_addr = 'localhost:5001'
   $http_headers = {
-    'X-Content-Type-Options' => '[nosniff]'
+    'X-Content-Type-Options' => '[nosniff]',
   }
 
   $notifications_name = $::fqdn
