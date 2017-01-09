@@ -11,7 +11,7 @@ log:
   hooks:
     - type: mail
       disabled: <%= scope['docker_distribution::log_hooks_mail_disabled'] %>
-<% if !scope['docker_distribution::log_hooks_mail_disabled'] then -%>
+<% unless scope['docker_distribution::log_hooks_mail_disabled'] then -%>
       levels:
 <% Array(scope['docker_distribution::log_hooks_mail_levels']).sort.each do |value| -%>
         - <%= value %>
@@ -19,7 +19,7 @@ log:
       options:
         smtp:
           addr: <%= scope['docker_distribution::log_hooks_mail_smtp_addr'] %>
-<% if scope['docker_distribution::log_hooks_mail_smtp_username'] and scope['docker_distribution::log_hooks_mail_smtp_password'] then -%>
+<% if scope['docker_distribution::log_hooks_mail_smtp_username'] && scope['docker_distribution::log_hooks_mail_smtp_password'] then -%>
           username: <%= scope['docker_distribution::log_hooks_mail_smtp_username'] %>
           password: <%= scope['docker_distribution::log_hooks_mail_smtp_password'] %>
 <% end -%>
@@ -80,7 +80,7 @@ storage:
 <% end -%>
   delete:
     enabled: <%= scope['docker_distribution::storage_delete'] %>
-<% if !scope['docker_distribution::storage_redirect'].nil? then -%>
+<% unless scope['docker_distribution::storage_redirect'].nil? then -%>
   redirect:
     disable: <%= scope['docker_distribution::storage_redirect'] %>
 <% end -%>
@@ -169,7 +169,7 @@ redis:
 <% if scope['docker_distribution::proxy_remoteurl'] then -%>
 proxy:
   remoteurl: <%= scope['docker_distribution::proxy_remoteurl'] %>
-<% if scope['docker_distribution::proxy_username'] and scope['docker_distribution::proxy_password'] then -%>
+<% if scope['docker_distribution::proxy_username'] && scope['docker_distribution::proxy_password'] then -%>
   username: <%= scope['docker_distribution::proxy_username'] %>
   password: <%= scope['docker_distribution::proxy_password'] %>
 <% end -%>
