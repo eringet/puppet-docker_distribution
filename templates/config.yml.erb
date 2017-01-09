@@ -2,7 +2,7 @@ version: 0.1
 log:
   level: <%= scope['docker_distribution::log_level'] %>
   formatter: <%= scope['docker_distribution::log_formatter'] %>
-<% if scope['docker_distribution::log_fields'] then -%>
+<% unless [nil, :undefined, :undef, ''].include?(scope['docker_distribution::log_fields']) -%>
   fields:
 <% scope['docker_distribution::log_fields'].sort.each do |key,value| -%>
     <%= key -%>: <%= value %>
@@ -19,7 +19,8 @@ log:
       options:
         smtp:
           addr: <%= scope['docker_distribution::log_hooks_mail_smtp_addr'] %>
-<% if scope['docker_distribution::log_hooks_mail_smtp_username'] && scope['docker_distribution::log_hooks_mail_smtp_password'] then -%>
+<% unless ([nil, :undefined, :undef, ''].include?(scope['docker_distribution::log_hooks_mail_smtp_username']) &&
+ [nil, :undefined, :undef, ''].include?(scope['docker_distribution::log_hooks_mail_smtp_password'])) -%>
           username: <%= scope['docker_distribution::log_hooks_mail_smtp_username'] %>
           password: <%= scope['docker_distribution::log_hooks_mail_smtp_password'] %>
 <% end -%>
@@ -84,12 +85,12 @@ storage:
   redirect:
     disable: <%= scope['docker_distribution::storage_redirect'] %>
 <% end -%>
-<% if scope['docker_distribution::storage_cache_blobdescriptor'] then -%>
+<% unless [nil, :undefined, :undef, ''].include?(scope['docker_distribution::storage_cache_blobdescriptor']) -%>
   cache:
     blobdescriptor: <%= scope['docker_distribution::storage_cache_blobdescriptor'] %>
 <% end -%>
 
-<% if scope['docker_distribution::auth_type'] then -%>
+<% unless [nil, :undefined, :undef, ''].include?(scope['docker_distribution::auth_type']) -%>
 auth:
 <% if scope['docker_distribution::auth_type'] == 'token' then -%>
   token:
@@ -108,41 +109,41 @@ http:
   addr: <%= scope['docker_distribution::http_addr'] %>
   net: <%= scope['docker_distribution::http_net'] %>
   prefix: <%= scope['docker_distribution::http_prefix'] %>
-<% if scope['docker_distribution::http_host'] then -%>
+<% unless [nil, :undefined, :undef, ''].include?(scope['docker_distribution::http_host']) -%>
   host: <%= scope['docker_distribution::http_host'] %>
 <% end -%>
-<% if scope['docker_distribution::http_secret'] then -%>
+<% unless [nil, :undefined, :undef, ''].include?(scope['docker_distribution::http_secret']) -%>
   secret: <%= scope['docker_distribution::http_secret'] %>
 <% end -%>
-<% if scope['docker_distribution::http_tls'] then -%>
+<% unless [nil, :undefined, :undef, ''].include?(scope['docker_distribution::http_tls']) -%>
   tls:
     certificate: <%= scope['docker_distribution::http_tls_certificate'] %>
     key: <%= scope['docker_distribution::http_tls_key'] %>
-<% if scope['docker_distribution::http_tls_clientcas'] then -%>
+<% unless [nil, :undefined, :undef, ''].include?(scope['docker_distribution::http_tls_clientcas']) -%>
     clientcas:
 <% Array(scope['docker_distribution::http_tls_clientcas']).sort.each do |value| -%>
       - <%= value %>
 <% end -%>
 <% end -%>
 <% end -%>
-<% if scope['docker_distribution::http_debug_addr'] then -%>
+<% unless [nil, :undefined, :undef, ''].include?(scope['docker_distribution::http_debug_addr']) -%>
   debug:
     addr: <%= scope['docker_distribution::http_debug_addr'] %>
 <% end -%>
-<% if scope['docker_distribution::http_headers'] then -%>
+<% unless [nil, :undefined, :undef, ''].include?(scope['docker_distribution::http_headers']) -%>
   headers:
 <% scope['docker_distribution::http_headers'].sort.each do |key,value| -%>
     <%= key -%>: <%= value %>
 <% end -%>
 <% end -%>
 
-<% if scope['docker_distribution::notifications_url'] then -%>
+<% unless [nil, :undefined, :undef, ''].include?(scope['docker_distribution::notifications_url']) -%>
 notifications:
   endpoints:
     - name: <%= scope['docker_distribution::notifications_name'] %>
       disabled: <%= scope['docker_distribution::notifications_disabled'] %>
       url: <%= scope['docker_distribution::notifications_url'] %>
-<% if scope['docker_distribution::notifications_headers'] then -%>
+<% unless [nil, :undefined, :undef, ''].include?(scope['docker_distribution::notifications_headers']) -%>
       headers: <%= scope['docker_distribution::notifications_headers'] %>
 <% end -%>
       timeout: <%= scope['docker_distribution::notifications_timeout'] %>
@@ -150,10 +151,10 @@ notifications:
       backoff: <%= scope['docker_distribution::notifications_backoff'] %>
 <% end -%>
 
-<% if scope['docker_distribution::redis_addr'] then -%>
+<% unless [nil, :undefined, :undef, ''].include?(scope['docker_distribution::redis_addr']) -%>
 redis:
   addr: <%= scope['docker_distribution::redis_addr'] %>
-<% if scope['docker_distribution::redis_password'] then -%>
+<% unless [nil, :undefined, :undef, ''].include?(scope['docker_distribution::redis_password']) -%>
   password: <%= scope['docker_distribution::redis_password'] %>
 <% end -%>
   db: <%= scope['docker_distribution::redis_db'] %>
@@ -166,10 +167,11 @@ redis:
     idletimeout: <%= scope['docker_distribution::redis_pool_idletimeout'] %>
 <% end -%>
 
-<% if scope['docker_distribution::proxy_remoteurl'] then -%>
+<% unless [nil, :undefined, :undef, ''].include?(scope['docker_distribution::proxy_remoteurl']) -%>
 proxy:
   remoteurl: <%= scope['docker_distribution::proxy_remoteurl'] %>
-<% if scope['docker_distribution::proxy_username'] && scope['docker_distribution::proxy_password'] then -%>
+<% unless ([nil, :undefined, :undef, ''].include?(scope['docker_distribution::proxy_username']) &&
+  [nil, :undefined, :undef, ''].include?(scope['docker_distribution::proxy_password'])) -%>
   username: <%= scope['docker_distribution::proxy_username'] %>
   password: <%= scope['docker_distribution::proxy_password'] %>
 <% end -%>
