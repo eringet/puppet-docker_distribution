@@ -99,7 +99,7 @@ class docker_distribution::params {
   $http_tls_certificate = "${::settings::ssldir}/certs/${::clientcert}.pem"
   $http_tls_key = "${::settings::ssldir}/private_keys/${::clientcert}.pem"
   $http_tls_clientcas = undef
-  $http_debug_addr = 'localhost:5001'
+  $http_debug_addr = undef
   $http_headers = {
     'X-Content-Type-Options' => '[nosniff]',
   }
