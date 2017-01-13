@@ -1,6 +1,6 @@
 {
 	"name": "cristifalcas-docker_distribution",
-	"version": "3.2.1",
+	"version": "3.3.0",
 	"author": "Cristian Falcas",
 	"dependencies": [
 		{
@@ -13,7 +13,6 @@
 		}
 	],
 	"license": "Apache-2.0",
-	"operatingsystem_support": [],
 	"project_page": "https://github.com/cristifalcas/puppet-docker_distribution",
 	"requirements": [],
 	"source": "git@github.com:cristifalcas/puppet-docker_distribution.git",

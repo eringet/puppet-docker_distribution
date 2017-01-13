@@ -83,9 +83,9 @@ class docker_distribution::params {
   $auth_type = undef
 
   $auth_token_realm = 'token-realm'
-  $auth_token_service = 'token-service'
-  $auth_token_issuer = 'registry-token-issuer'
-  $auth_token_rootcertbundle = '/root/certs/bundle'
+  $auth_token_service = 'Docker registry'
+  $auth_token_issuer = 'Auth Service'
+  $auth_token_rootcertbundle = '/etc/ssl/certs/'
 
   $auth_htpasswd_realm = 'basic-realm'
   $auth_htpasswd_path = '/path/to/htpasswd'

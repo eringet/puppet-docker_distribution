@@ -15,7 +15,7 @@
 #   Defaults to docker-distribution-registry
 #
 # [*package_ensure*]
-#   Passed to the docker package.
+#   Passed to the package resource.
 #   Defaults to present
 #
 # [*config_file*]
@@ -27,11 +27,11 @@
 #   Defaults to registry
 #
 # [*service_ensure*]
-#   Whether you want to kube daemons to start up
+#   Whether you want to docker_distribution to start up
 #   Defaults to running
 #
 # [*service_enable*]
-#   Whether you want to kube daemons to start up at boot
+#   Whether you want to docker_distribution to start up at boot
 #   Defaults to true
 #
 # [*journald_forward_enable*]
