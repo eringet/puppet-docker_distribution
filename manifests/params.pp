@@ -3,15 +3,22 @@ class docker_distribution::params {
   $container_image = 'docker.io/registry:latest'
 
   case $::osfamily {
-    'redhat'  : {
+    'RedHat'  : {
       $package_name = 'docker-distribution'
       $service_name = 'docker-distribution'
       $config_file  = '/etc/docker-distribution/registry/config.yml'
+      $global_ca = '/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem'
     }
-    'suse'    : {
+    'Suse'    : {
       $package_name = 'docker-distribution-registry'
       $service_name = 'registry'
       $config_file  = '/etc/registry/config.yml'
+    }
+    'Debian'    : {
+      $package_name = 'docker-distribution'
+      $service_name = 'docker-distribution'
+      $config_file  = '/etc/docker-distribution/registry/config.yml'
+      $global_ca = '/etc/ssl/certs/ca-certificates.crt'
     }
     default : {
       fail("Distribution not supported: ${::osfamily}.")
@@ -22,6 +29,7 @@ class docker_distribution::params {
   $service_ensure = 'running'
   $service_enable = true
   $journald_forward_enable = false
+  $mount_global_ca = false
 
   $log_level = 'info'
   $log_formatter = 'text'

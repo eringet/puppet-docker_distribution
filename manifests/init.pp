@@ -38,6 +38,10 @@
 #   Fix for SIGPIPE sent to registry daemon during journald restart
 #   Defaults to false
 #
+# [*mount_global_ca*]
+#   Based on OS, mount the system ca inside container
+#   Defaults to false
+#
 # [*log_level*]
 #   Sets the sensitivity of logging output. Permitted values are error, warn, info and debug.
 #   The default is info. 
@@ -364,6 +368,7 @@ class docker_distribution (
   $service_ensure               = $::docker_distribution::params::service_ensure,
   $service_enable               = $::docker_distribution::params::service_enable,
   $journald_forward_enable      = $::docker_distribution::params::journald_forward_enable,
+  $mount_global_ca              = $::docker_distribution::params::mount_global_ca,
   $log_level                    = $::docker_distribution::params::log_level,
   $log_formatter                = $::docker_distribution::params::log_formatter,
   $log_fields                   = $::docker_distribution::params::log_fields,

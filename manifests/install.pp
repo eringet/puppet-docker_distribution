@@ -18,16 +18,23 @@ class docker_distribution::install {
       $vol_ca = undef
     }
 
+    if $::docker_distribution::mount_global_ca {
+      $vol_global_ca = "${::docker_distribution::global_ca}:/etc/ssl/certs/ca-certificates.crt"
+    } else {
+      $vol_global_ca = undef
+    }
+
     docker::run { $::docker_distribution::package_name:
       image           => $::docker_distribution::container_image,
       volumes         => delete_undef_values([
-          "${::docker_distribution::config_file}:/etc/docker/registry/config.yml",
-          "${::docker_distribution::filesystem_rootdirectory}:${::docker_distribution::filesystem_rootdirectory}",
-          "${::docker_distribution::auth_token_rootcertbundle}:${::docker_distribution::auth_token_rootcertbundle}",
-          $vol_cert,
-          $vol_key,
-          $vol_ca,
-      ]),
+        "${::docker_distribution::config_file}:/etc/docker/registry/config.yml",
+        "${::docker_distribution::filesystem_rootdirectory}:${::docker_distribution::filesystem_rootdirectory}",
+        "${::docker_distribution::auth_token_rootcertbundle}:${::docker_distribution::auth_token_rootcertbundle}",
+        $vol_global_ca,
+        $vol_cert,
+        $vol_key,
+        $vol_ca,
+        ]),
       restart_service => true,
       net             => 'host',
       detach          => false,
